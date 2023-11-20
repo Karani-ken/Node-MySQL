@@ -53,6 +53,30 @@ const insertUser = async (userData)=>{
         throw err;
     }
 }
+const selectUsers = async ()=>{
+    try {
+        const users= await executeQuery(queries.selectUsersQuery);
+        return users
+    } catch (error) {
+        throw error;
+    }
+}
+const selectByName = async (name)=>{
+    try {
+        const user = await executeQuery(queries.selectUserByName,[name])
+        return user;
+    } catch (error) {
+        throw error
+    }
+}
+const orderByName = async () =>{
+    try {
+        const users = await executeQuery(queries.orderByName);
+        return users;
+    } catch (error) {
+        throw error
+    }
+}
 const initializeDatabase = async ()=>{
     try {
         await createDatabaseIfNotExists();
@@ -64,5 +88,10 @@ const initializeDatabase = async ()=>{
 }
 
 module.exports ={
-    pool,initializeDatabase,insertUser
+    pool,
+    initializeDatabase,
+    insertUser,
+    selectUsers,
+    selectByName,
+    orderByName
 }

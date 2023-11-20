@@ -16,9 +16,33 @@ dbHandler.pool.getConnection((err, connection)=>{
             throw err;
         })
 })
-app.get('/', (req,res)=>{
-    res.send('this my MySQL app');
+app.get('/users', async (req,res)=>{
+    try {
+      const users = await dbHandler.selectUsers();
+      res.json(users);
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({error:"interna server error"})
+    }
 });
+app.get('/users/:name', async (req,res)=>{
+    const name = req.params.name;
+    try {
+        const user = await dbHandler.selectByName(name);
+        console.log(user);
+        res.json(user);
+    } catch (error) {
+        throw error
+    }
+})
+app.get('/orderbyname', async(req,res)=>{
+    try {
+        const users= await dbHandler.orderByName();
+        res.json(users);
+    } catch (error) {
+        throw error
+    }
+})
 app.post("/createuser", async (req,res)=>{
     const userData = req.body;
     

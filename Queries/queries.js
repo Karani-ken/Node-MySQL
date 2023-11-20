@@ -5,6 +5,9 @@ const showDatabasesQuery = `SHOW DATABASES LIKE "${dbConfig.database}"`;
 const createDatabaseQuery = `CREATE DATABASE IF NOT EXISTS ${dbConfig.database}`;
 const useDatabaseQuery = `USE ${dbConfig.database}`;
 const showUsersTableQuery = 'SHOW TABLES LIKE "users"';
+const selectUsersQuery = 'SELECT * FROM users';
+const selectUserByName = 'SELECT * FROM users WHERE name = ?'
+const orderByName = 'SELECT * FROM users ORDER BY name'
 
 module.exports ={
     insertUsersQuery,
@@ -12,5 +15,8 @@ module.exports ={
     showDatabasesQuery,
     createDatabaseQuery,
     useDatabaseQuery,
-    showUsersTableQuery
+    showUsersTableQuery,
+    selectUsersQuery,
+    selectUserByName,
+    orderByName
 }
